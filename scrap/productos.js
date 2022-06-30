@@ -5,8 +5,8 @@ async function scraping_productos(urlBase, seccion, categoria) {
     let producto = [];
     let finalizado = false;
     const hoy = new Date(Date.now());
-    var url_nueva = urlBase.split('?')[0] + '?';
-    var fetch_url = url_nueva;
+    let url_nueva = urlBase.split('?')[0] + '?';
+    let fetch_url = url_nueva;
     if (seccion.toLowerCase() == 'celulares' || seccion.toLowerCase() == 'computación') {
         fetch_url = fetch_url + 'facet=Condición%20de%20producto%3ANuevo&s=mdco';
     } else if (seccion.toLowerCase() == 'mundo gamer') {
@@ -46,7 +46,7 @@ async function scraping_productos(urlBase, seccion, categoria) {
     } else {
         fetch_url = fetch_url + 'facet=Precio%3A%24262.389%20-%20%244.199.990&s=mdco';
     }
-    var url_paginacion = '';
+    let url_paginacion = '';
     while (!finalizado) {
         try {
             const result = await fetch(fetch_url + url_paginacion, {
@@ -56,7 +56,7 @@ async function scraping_productos(urlBase, seccion, categoria) {
             }).then(response => response.text()).then(data => {
                 const result_data = data.match(/(\{"\@context".+?\n)/gi);
                 const result_data_json = JSON.parse(result_data[0]);
-                var next_url = data.match(/<a href="([a-z0-9A-Z\ñ\Ñ\á\é\í\ó\ú\Á\É\Í\Ó\Ú\?&;=%\.\-]+?)"><span aria-hidden="true">»/gi)[0];
+                let next_url = data.match(/<a href="([a-z0-9A-Z\ñ\Ñ\á\é\í\ó\ú\Á\É\Í\Ó\Ú\?&;=%\.\-]+?)"><span aria-hidden="true">»/gi)[0];
                 next_url = '&' + next_url.split('mdco&amp;')[1].split('">')[0]
                 return [result_data_json, next_url];
             });

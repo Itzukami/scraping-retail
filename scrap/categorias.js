@@ -34,8 +34,8 @@ async function scraping_categorias(urlBase, xpath, categorias, subcategoria, vol
         ////////////////////////////// Recorremos las subcategorias ///////////////////////////////////
         for (const subcategoria of subcategorias_listada) {
             /////////////////////////////// Guardamos el nombre y url de la subcategoria //////////////////////
-            var subcategoria_name = await subcategoria.innerText();
-            var subcategoria_url = await subcategoria.getAttribute('href');
+            let subcategoria_name = await subcategoria.innerText();
+            let subcategoria_url = await subcategoria.getAttribute('href');
             /////// eliminar el primer caracter de subcategoria_url ////////
             subcategoria_url = subcategoria_url.substring(1);
             subcategorias_obtenidas.push({

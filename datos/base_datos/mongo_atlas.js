@@ -13,7 +13,7 @@ function removeDuplicates(originalArray, prop) {
         lookupObject[originalArray[i][prop]] = originalArray[i];
     }
 
-    for (i in lookupObject) {
+    for (let i in lookupObject) {
         newArray.push(lookupObject[i]);
     }
     return newArray;
@@ -28,7 +28,7 @@ async function detect(doc, documentos) {
     const ids_productos = uniqueArray.map(producto => {
         return producto.id;
     });
-    //console.log(ids_productos);
+
     //////////////////////////////////////////////////////////// Get all Ids in the mongo ////////////////////////////////////////////////////////////
     let ids_existentes = await doc.find({ id: { $in: ids_productos } }).toArray();
     console.log('EXISTENTES : ==>   ' + ids_existentes.length);
