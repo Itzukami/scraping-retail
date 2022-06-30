@@ -1,6 +1,6 @@
 const url_string =
 {
-    url: `mongodb+srv://<User:Pass>@cluster0.2gp58.mongodb.net/<ID>?retryWrites=true&w=majority`,
+    url: `mongodb+srv://Romeofruk195:1234@cluster0.2gp58.mongodb.net/GPU?retryWrites=true&w=majority`,
 };
 
 
