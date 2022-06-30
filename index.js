@@ -23,7 +23,7 @@ let all_productos = [];
                 // break;
             }
         }
-    };
+    }
     ///////////////////////////////////////// Envio los Productos  a JSON /////////////////////////////////////////////////////////////
 
     console.log('Finaliza el scraping');

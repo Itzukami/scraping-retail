@@ -32,10 +32,10 @@ async function scraping_categorias(urlBase, xpath, categorias, subcategoria, vol
         /////////////////////////////// Cargamos las subcategorias ////////////////////////////////////
         subcategorias_listada = await page.$$(subcategoria);
         ////////////////////////////// Recorremos las subcategorias ///////////////////////////////////
-        for (const subcategoria of subcategorias_listada) {
+        for (const element of subcategorias_listada) {
             /////////////////////////////// Guardamos el nombre y url de la subcategoria //////////////////////
-            let subcategoria_name = await subcategoria.innerText();
-            let subcategoria_url = await subcategoria.getAttribute('href');
+            let subcategoria_name = await element.innerText();
+            let subcategoria_url = await element.getAttribute('href');
             /////// eliminar el primer caracter de subcategoria_url ////////
             subcategoria_url = subcategoria_url.substring(1);
             subcategorias_obtenidas.push({
