@@ -6,10 +6,10 @@ const url = url_string.url;
 
 
 function removeDuplicates(originalArray, prop) {
-    var newArray = [];
-    var lookupObject = {};
+    let newArray = [];
+    let lookupObject = {};
 
-    for (var i in originalArray) {
+    for (let i in originalArray) {
         lookupObject[originalArray[i][prop]] = originalArray[i];
     }
 
@@ -20,22 +20,22 @@ function removeDuplicates(originalArray, prop) {
 }
 
 async function detect(doc, documentos) {
-    var updates = [];
+    let updates = [];
     console.log('------- Detect --------');
     //////////////////////////////////////////////////////////// Get all Ids in the document ////////////////////////////////////////////////////////////
     // eliminar los duplicados de los documentos
-    var uniqueArray = removeDuplicates(documentos, "id");
+    let uniqueArray = removeDuplicates(documentos, "id");
     const ids_productos = uniqueArray.map(producto => {
         return producto.id;
     });
     //console.log(ids_productos);
     //////////////////////////////////////////////////////////// Get all Ids in the mongo ////////////////////////////////////////////////////////////
-    var ids_existentes = await doc.find({ id: { $in: ids_productos } }).toArray();
+    let ids_existentes = await doc.find({ id: { $in: ids_productos } }).toArray();
     console.log('EXISTENTES : ==>   ' + ids_existentes.length);
 
 
     //////////////////////////////////////////////////////////// Get all New Ids  ////////////////////////////////////////////////////////////
-    var productos_no_existentes = uniqueArray.filter(documento => {
+    let productos_no_existentes = uniqueArray.filter(documento => {
         return !ids_existentes.some(id_existente => {
             return id_existente.id == documento.id || id_existente.url == documento.url;
         });
@@ -64,8 +64,8 @@ async function detect(doc, documentos) {
                 });
             });
             // añadir los precios de id_existentes a items_nuevos por id
-            for (var i = 0; i < ids_existentes.length; i++) {
-                for (var j = 0; j < items_nuevos.length; j++) {
+            for (let i = 0; i < ids_existentes.length; i++) {
+                for (let j = 0; j < items_nuevos.length; j++) {
                     if (ids_existentes[i].id == items_nuevos[j].id && ids_existentes[i].url == items_nuevos[j].url) {
                         items_nuevos[j].precio_old = ids_existentes[i].precio;
                     }
@@ -75,9 +75,9 @@ async function detect(doc, documentos) {
                 if (i == 2261) {
                     console.log('Aca esta ' + items_nuevos[i].id);
                 }
-                var precios_promediar = [];
-                var promedio = 0;
-                var porcentaje_des = 0;
+                let precios_promediar = [];
+                let promedio = 0;
+                let porcentaje_des = 0;
                 console.log('indice: ' + i);
                 // si items_nuevos[i].precio_cold es null, no se actualiza
                 if (items_nuevos[i].precio_old != null) {
@@ -109,7 +109,7 @@ async function bulkWrite(doc, updates) {
 }
 
 function ArrayAvg(myArray) {
-    var i = 0, summ = 0, ArrayLen = myArray.length;
+    let i = 0, summ = 0, ArrayLen = myArray.length;
     while (i < ArrayLen) {
         summ = summ + parseInt(myArray[i++]);
     }
